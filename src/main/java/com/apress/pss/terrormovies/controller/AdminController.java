@@ -16,4 +16,10 @@ public class AdminController {
 		System.out.println("Adding movie!! " + movie);
 		return "created";
 	}
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/movies")
+	@ResponseBody
+	public String createMovie() {
+		return "movie x";
+	}
 }
