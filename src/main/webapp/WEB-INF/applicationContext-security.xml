@@ -5,11 +5,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd">
 
-	<security:http auto-config="true" entry-point-ref="digestEntryPoint">
+	<security:http auto-config="true">
 		<security:intercept-url pattern="/admin/**/*"
 			access="ROLE_ADMIN" />
-		<security:custom-filter ref="digestFilter"
-			before="BASIC_AUTH_FILTER" />
+		<security:form-login/>
+		<security:remember-me key="terror-key"/>
 	</security:http>
 
 	<security:authentication-manager>
@@ -21,16 +21,5 @@
 		</security:authentication-provider>
 	</security:authentication-manager>
 
-	<bean id="digestFilter"
-		class="org.springframework.security.web.authentication.www.DigestAuthenticationFilter">
-		<property name="userDetailsService" ref="userService" />
-		<property name="authenticationEntryPoint" ref="digestEntryPoint" />
-	</bean>
-
-	<bean id="digestEntryPoint"
-		class="org.springframework.security.web.authentication.www.DigestAuthenticationEntryPoint">
-		<property name="realmName" value="terrormovies-realm" />
-		<property name="key" value="terrorific" />
-	</bean>
 
 </beans>
