@@ -10,7 +10,7 @@
 			access="ROLE_ADMIN" />
 		<security:form-login/>
 		<security:remember-me key="terror-key"/>
-		<security:logout delete-cookies="JSESSIONID"/>
+		<security:logout delete-cookies="JSESSIONID" success-handler-ref="logoutRedirectToAny"/>
 	</security:http>
 
 	<security:authentication-manager>
@@ -29,6 +29,10 @@
 				<bean class="org.springframework.security.access.vote.AuthenticatedVoter"/>
 			</list>
 		</constructor-arg>
+	</bean>
+	
+	<bean id="logoutRedirectToAny" class="org.springframework.security.web.authentication.logout.SimpleUrlLogoutSuccessHandler">
+		<property name="targetUrlParameter" value="redirectTo"/>
 	</bean>
 
 
